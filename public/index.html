@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ProgProd">
   <head>
     <meta charset="utf-8">
-    <title>Hola</title>
+    <title>Programa Produccion</title>
+
+    <!-- vendor -->
+    <script src="/bower/angular/angular.js"></script>
+
+    <!-- app -->
+    <script src="/js/app.js"></script>
+
+    <!-- directives -->
+
+    <!-- controllers -->
+    <script src="/js/controllers/prog.js"></script>
+
+    <!-- filters -->
+
+    <!-- services -->
+
   </head>
-  <body>
-    <h1>Hola</h1>
+  <body ng-controller= "ProgController">
+    <h1>{{saludo}}</h1>
   </body>
 </html>
