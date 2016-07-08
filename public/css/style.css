@@ -95,6 +95,7 @@ CSS del calendario
 
 .eliminar {
   color: red;
+  visibility: hidden;
 }
 
 .eliminar:hover {
