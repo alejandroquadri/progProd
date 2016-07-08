@@ -1,0 +1,70 @@
+<div>
+   <!-- ng-controller="Calendario"> -->
+
+  <div class="modal-header">
+    <h3 class="modal-title">Programación del {{fecha.date.format('DD MMMM YYYY')}}</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+
+      <div class="col-sm-6">
+        <form focus name="form" ng-model="form" ng-submit="submit()">
+          <div class="form-group">
+            <label for="maquina">Maquina / Proceso</label>
+            <select id="maquina" class="form-control" ng-model="maquina" name="maquina " autofocus required>
+              <option>1440</option>
+              <option>650</option>
+              <option>Breton</option>
+              <option>Lineal</option>
+              <option>Pastinas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="codigo">Codigo</label>
+            <select id="codigo" class="form-control" ng-model="codigo" name="codigo" required>
+              <option>83ADRP4040</option>
+              <option>1010S4040</option>
+              <option>801010KL4040</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input type="text" class="form-control" id="cantidad" ng-model="cantidad">
+          </div>
+          <input ng-disabled="form.maquina.$invalid || form.codigo.$invalid" class="btn btn-primary" type="submit" id="submit" value="Agregar"/>
+        </form>
+      </div>
+
+      <div class="col-sm-6" ng-show="nuevos[0]">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td ng-repeat="(key,val) in nuevos[0]" class="col-sm-1">
+                {{key}}
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="linea in nuevos">
+              <td ng-repeat="(key,val) in linea">
+                {{val}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-success" type="button" ng-click="ok()" ng-disabled="!(nuevos[0])">Ok</button>
+    <button class="btn btn-danger" type="button" ng-click="cancel()">Cancelar</button>
+  </div>
+
+
+</div>
+<div class="row">
+  <div class="col-sm-12
