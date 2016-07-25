@@ -7,11 +7,9 @@ angular.module('ProgProd')
       $(element).hover(
         function () {
             $(this).find('span.eliminar').css('visibility','visible')//.addClass('hovering');
-            console.log('agregado');
         },
         function () {
             $(this).find('span.eliminar').css('visibility','hidden')//.removeClass('hovering');
-            console.log('removido');
         }
       );
     }

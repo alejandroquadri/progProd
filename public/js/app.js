@@ -9,7 +9,9 @@ angular.module('ProgProd',['ui.router','ui.bootstrap','firebase'])
     url:'/calendario',
     templateUrl:'templates/calendar.html',
     resolve:{
-
+      base: function () {
+        return firebase.database().ref('programa')
+      }
     },
     controller: 'Calendario',
     controllerAs:'ctrlCal'

@@ -27,7 +27,7 @@
                     <div ng-repeat="valor in array" hover>
                       {{valor.codigo}} {{valor.valor || nada}} {{valor.unidad || nada}}
                       <span class="glyphicon glyphicon-remove eliminar" aria-hidden="true"
-                      ng-click="eliminar(day.date.format('YYYYMMDD'),maquina, valor.codigo, $index, valor)"></span>
+                      ng-click="eliminar(day.date.format('YYYYMMDD'),maquina, valor.codigo, $index)"></span>
                     </div>
                   </div>
                 </div>

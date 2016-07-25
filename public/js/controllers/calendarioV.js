@@ -1,6 +1,6 @@
 angular.module('ProgProd')
 
-.controller('Calendario', function($scope, $uibModal, $firebaseObject, $firebaseArray, base){
+.controller('Calendario', function($scope, $uibModal, $firebaseObject, base){
 
   var baseSync = $firebaseObject(base)
   baseSync.$loaded()
@@ -8,6 +8,22 @@ angular.module('ProgProd')
     $scope.data = baseSync;
     console.log('Sincronizado con $scope.data', $scope.data);
   })
+  .then(function(){
+    base.child(dia+'/'+maquina).push(array);
+  })
+  .then(function(){
+    console.log('data final', $scope.data['20160701']);
+  })
+
+  var array = {
+        codigo: '1111S 4040',
+        valor: 200,
+        unidad: 'm2',
+        fabricado: true
+    }
+  var dia = '20160701';
+  var maquina = '1440'
+
 
   $scope.nada = "";
 
@@ -96,40 +112,32 @@ angular.module('ProgProd')
     //con esta funcion digo que es lo que pasa con lo que vuelve del modal
     modalInstance.result.then(function (nuevos) {
       var fechaFormato = fecha.date.format("YYYYMMDD");
+      (!$scope.data[fechaFormato])? $scope.data[fechaFormato]={}:console.log('Existe');
 
       for (var i=0; i < nuevos.length ; i ++) {
+        (!$scope.data[fechaFormato][nuevos[i].maquina])? $scope.data[fechaFormato][nuevos[i].maquina]=[]:console.log('Exite');
+
         var nuevo = {
           codigo: nuevos[i].codigo,
-          valor: nuevos[i].valor || "",
+          valor: nuevos[i].valor,
           unidad: 'm2',
           fabricado: false
         }
-        base.child(fechaFormato+'/'+nuevos[i].maquina).push(nuevo);
 
+        $scope.data[fechaFormato][nuevos[i].maquina].push(nuevo);
       }
     }, function (ret) { //esto se usa para definir que pasa cuando cancelo el modal
       console.log('dismissed');
     });
   }
 
-  $scope.eliminar = function (fecha, maquina, codigo, index, valor){
-    console.log('ret',fecha, maquina, codigo, index, valor);
-    var arreglo = $firebaseArray(base.child(fecha+'/'+maquina))
-
-    arreglo.$loaded().then(function(){
-      var item = arreglo[index]
-      return item;
-    })
-    .then(function(item){
-      arreglo.$remove(item)
-      console.log('borrado');
-    })
-    .then(function(){
-      arreglo.$destroy();
-    })
-    .then(function(){
-      console.log('desincronizado');
-    });
+  $scope.eliminar = function (fecha, maquina, codigo, index){
+    console.log('ret',fecha, maquina, codigo, index);
+    if (index===0){
+      delete $scope.data[fecha][maquina]
+    } else {
+      $scope.data[fecha][maquina].splice(index,1);
+    }
   }
 })
 
