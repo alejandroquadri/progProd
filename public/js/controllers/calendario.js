@@ -1,6 +1,6 @@
 angular.module('ProgProd')
 
-.controller('Calendario', function($scope, $uibModal, $firebaseObject, $firebaseArray, base){
+.controller('Calendario', function($scope, $uibModal, $firebaseObject, $firebaseArray, base, dataForm){
 
   var baseSync = $firebaseObject(base)
   baseSync.$loaded()
@@ -77,7 +77,8 @@ angular.module('ProgProd')
     //este objeto lo uso para mandar datos al modal
      var modal = {
       fecha: fecha,
-      data: $scope.data
+      data: $scope.data,
+      dataForm: dataForm
     }
 
     //con esto abro el modal y mando la info que necesito
@@ -101,11 +102,11 @@ angular.module('ProgProd')
         var nuevo = {
           codigo: nuevos[i].codigo,
           valor: nuevos[i].valor || "",
-          unidad: 'm2',
+          unidad: nuevos[i].unidad || "",
+          descripcion: nuevos[i].obj.descripcion,
           fabricado: false
         }
         base.child(fechaFormato+'/'+nuevos[i].maquina).push(nuevo);
-
       }
     }, function (ret) { //esto se usa para definir que pasa cuando cancelo el modal
       console.log('dismissed');

@@ -4,14 +4,24 @@ angular.module('ProgProd')
 
   $scope.fecha = modal.fecha;
   $scope.data = modal.data;
+  $scope.dataForm = modal.dataForm;
 
-  $scope.nuevos = []
+  $scope.nuevos = [];
+  $scope.pasar = [];
 
   $scope.submit = function () {
     $scope.nuevos.push({
       maquina: this.maquina,
-      codigo: this.codigo,
-      valor: this.cantidad
+      codigo: this.codigo.codigo,
+      valor: this.cantidad,
+      unidad:this.unidad
+    })
+    $scope.pasar.push({
+      maquina: this.maquina,
+      codigo: this.codigo.codigo,
+      valor: this.cantidad,
+      unidad:this.unidad,
+      obj: this.codigo
     })
     this.maquina = "";
     this.codigo = "";
@@ -20,7 +30,7 @@ angular.module('ProgProd')
   };
 
   $scope.ok = function (){
-    $uibModalInstance.close($scope.nuevos);
+    $uibModalInstance.close($scope.pasar);
   };
 
   $scope.cancel = function () {
