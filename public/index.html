@@ -5,6 +5,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>Programa Produccion</title>
     <!-- Latest compiled and minified CSS -->
+    <link rel="shortcut icon" href="/img/calendar.ico" type="image/x-icon">
+    <link rel="icon" href="img/calendar.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
@@ -20,9 +22,14 @@
       </button>
     </div>
 
-    <div  ui-view></div>
-    <button type="button" name="button" ng-click="bajada()">bajada</button>
-    <p>{{datos | json}}</p>
+
+    <div class=".container">
+      <div class="row">
+        <div class="col-md-9 calendario" ui-view="calendario"></div>
+        <div class="col-md-3 entregas" ui-view="entregas"></div>
+      </div>
+    </div>
+
 
   </body>
 
@@ -61,10 +68,12 @@
   <script src="/js/controllers/prog.js"></script>
   <script src="/js/controllers/calendario.js"></script>
   <script src="/js/controllers/instanciaModal.js"></script>
+  <script src="/js/controllers/entregas.js"></script>
 
   <!-- filters -->
 
   <!-- services -->
   <script src="/js/services/dataForm.js"></script>
-  
+    <script src="/js/services/gSS.js"></script>
+
 </html>

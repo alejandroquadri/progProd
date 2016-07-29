@@ -1,12 +1,11 @@
 angular.module('ProgProd')
 
 .controller('Calendario', function($scope, $uibModal, $firebaseObject, $firebaseArray, base, dataForm){
-
   var baseSync = $firebaseObject(base)
   baseSync.$loaded()
   .then(function(){
     $scope.data = baseSync;
-    console.log('Sincronizado con $scope.data', $scope.data);
+    //console.log('Sincronizado con $scope.data', $scope.data);
   })
 
   $scope.nada = "";
@@ -133,48 +132,3 @@ angular.module('ProgProd')
     });
   }
 })
-
-// $scope.data = {
-//   20160701 : {
-//     1440: [{
-//       codigo: '1111S 4040',
-//       valor: 200,
-//       unidad: 'm2',
-//       fabricado: true
-//     },
-//     {
-//       codigo: '1716S 4040',
-//       valor: 200,
-//       unidad: 'm2',
-//       fabricado: true
-//     }],
-//     Lineal:[{
-//       codigo: '83ADRP324040',
-//       valor: 200,
-//       unidad: 'm2',
-//       fabricado: true
-//     }],
-//     Pastina: [{
-//       codigo: '0020  10',
-//       valor: 200,
-//       unidad:'bolsas',
-//       fabricado: true
-//     }]
-//   },
-//   20160705 : {
-//     650: [{
-//       codigo: '1010S  4040',
-//       fabricado: false
-//     },
-//     {
-//       codigo: '1111S  4040',
-//       fabricado: false
-//     }],
-//     Breton:[{
-//       codigo: '83ADRP724040',
-//       valor: 200,
-//       unidad: 'm2',
-//       fabricado: true
-//     }]
-//   }
-// }

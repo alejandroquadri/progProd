@@ -1,4 +1,5 @@
 <div class="container">
+  <h3>Calendario de produccion</h3> <br><br>
   <div class="row titulo">
     <div class="celdaTitulo next col-sm-1" ng-click="previous()"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></div>
     <div class="celdaTitulo col-sm-10" colspan="5"><span>{{month.format("MMMM YYYY") | uppercase}}</span></div>
@@ -39,7 +40,3 @@
   </div>
 </div>
 <br>
-<p>
-  {{selected.format('DD MMMM YYYY')}}
-  {{ctrlCal.prueba}}
-</p>

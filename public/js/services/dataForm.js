@@ -42,7 +42,10 @@ angular.module('ProgProd')
       {codigo:'9BP1017P5050', descripcion:'Placa pileta', unidad:'m2'},
       {codigo:'9BL1017P4050', descripcion:'Borde pileta', unidad:'ml'},
       {codigo:'9BRE1017P2550', descripcion:'Rejilla pileta', unidad:'unidad'},
-      {codigo:'9J1010K3030', descripcion:'Bloque jardin', unidad:'m2'}
+      {codigo:'9J1010K3030', descripcion:'Bloque jardin', unidad:'m2'},
+      {codigo:'83RUS16 4040', descripcion:'Rustico Negro', unidad:'m2'},
+      {codigo:'83RUS12 4040', descripcion:'Rustico Rojo', unidad:'m2'},
+      {codigo:'83RUS10 4040', descripcion:'Rustico Gris', unidad:'m2'}
     ]
 
     o.maquinas = [
@@ -54,7 +57,10 @@ angular.module('ProgProd')
       'Desbañadora',
       'Cortadora',
       'Otro',
-      'Pastinas'
+      'Pastinas',
+      'Granalladora',
+      'Molde',
+      'Escalera'
     ]
 
     o.unidades = [
@@ -62,7 +68,6 @@ angular.module('ProgProd')
       'ml',
       'unidad',
       'm2',
-      'juego',
       'kg',
       'bolsa'
     ]

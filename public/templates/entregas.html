@@ -1,0 +1,22 @@
+<div class=".container">
+  <h3>Entregas programadas</h3><br>
+
+  <table class="table table-hover fontTabla">
+    <thead>
+      <tr>
+        <th class= "centro">item</th>
+        <!-- <th class= "centro" ng-repeat = "semana in semanas">{{semana}}</th> -->
+        <th class= "centro">esta semana</th>
+        <th class= "centro">+ 1 sem</th>
+        <th class= "centro">+ 2 sem</th>
+        <th class= "centro">+ 3 sem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in items | orderBy:'toString()'">
+        <td>{{item}}</td>
+        <td class= "centro" ng-repeat = "sem in semanas">{{datos[item][sem]| number:0}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -6,6 +6,7 @@ var CLIENT_ID = '555150682260-2kpu5ahoc78ph1vjs9juhmrl9fbm8u67.apps.googleuserco
 
 var SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
 
+window.googleSS = false;
 /**
  * Check if current user has authorized this application.
  */
@@ -15,7 +16,9 @@ function checkAuth() {
       'client_id': CLIENT_ID,
       'scope': SCOPES.join(' '),
       'immediate': true
-    }, handleAuthResult);
+    }, handleAuthResult).then(function(){
+      console.log('termino auth');
+    });
 }
 
 /**
@@ -52,10 +55,14 @@ function handleAuthClick(event) {
  * Load Sheets API client library.
  */
 function loadSheetsApi() {
-  var discoveryUrl =
-      'https://sheets.googleapis.com/$discovery/rest?version=v4';
+  var discoveryUrl = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
   gapi.client.load(discoveryUrl)
-  //.then(listMajors);
+  .then(function(){
+    console.log('termino de cargar');
+    window.googleSS = true;
+    console.log(window.googleSS);
+  });
+  // .then(listMajors);
 }
 
 // /**

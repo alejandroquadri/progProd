@@ -2,8 +2,9 @@
 CSS del calendario
 */
 
-.container {
-    height: 100%;
+.calendario {
+    height: 100vh;
+    overflow: auto;
 }
 
 .titulo {
@@ -45,7 +46,7 @@ CSS del calendario
 
 .celdaInterior {
   height: 80px;
-  overflow: auto;
+  overflow: scroll; ;
 }
 
 .numFecha {
@@ -115,3 +116,13 @@ CSS del calendario
   background-color: rgb(204, 199, 199);
   /*color: white;*/
 }
+
+/* CSS programador de entregas*/
+
+.entregas {
+  height: 100vh;
+}
+
+.centro {
+    text-align: center;
+  }
