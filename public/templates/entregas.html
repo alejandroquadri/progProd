@@ -1,22 +1,27 @@
-<div class=".container">
-  <h3>Entregas programadas</h3><br>
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
+    <h3>Entregas programadas</h3><br>
+    <div id="printArea">
+      <table class="table table-hover tablaEntregas">
+        <thead>
+          <tr>
+            <th class= "centro col-sm-1">item</th>
+            <!-- <th class= "centro" ng-repeat = "semana in semanas">{{semana}}</th> -->
+            <th class= "centro col-sm-1">esta semana</th>
+            <th class= "centro col-sm-1">+ 1 sem</th>
+            <th class= "centro col-sm-1">+ 2 sem</th>
+            <th class= "centro col-sm-1">+ 3 sem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in items | orderBy:'toString()'">
+            <td class="col-sm-1">{{item}}</td>
+            <td class= "centro col-sm-1" ng-repeat = "sem in semanas">{{datos[item][sem]| number:0}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <table class="table table-hover fontTabla">
-    <thead>
-      <tr>
-        <th class= "centro">item</th>
-        <!-- <th class= "centro" ng-repeat = "semana in semanas">{{semana}}</th> -->
-        <th class= "centro">esta semana</th>
-        <th class= "centro">+ 1 sem</th>
-        <th class= "centro">+ 2 sem</th>
-        <th class= "centro">+ 3 sem</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="item in items | orderBy:'toString()'">
-        <td>{{item}}</td>
-        <td class= "centro" ng-repeat = "sem in semanas">{{datos[item][sem]| number:0}}</td>
-      </tr>
-    </tbody>
-  </table>
+    <button type="button" name="button" ng-click="print()">Imprimir</button>
+  </div>
 </div>

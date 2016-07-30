@@ -1,42 +1,43 @@
-<div class="container">
-  <h3>Calendario de produccion</h3> <br><br>
-  <div class="row titulo">
-    <div class="celdaTitulo next col-sm-1" ng-click="previous()"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></div>
-    <div class="celdaTitulo col-sm-10" colspan="5"><span>{{month.format("MMMM YYYY") | uppercase}}</span></div>
-    <div class="celdaTitulo next col-sm-1" ng-click="next()"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 colTabla">
-      <table class="table table-bordered tabla">
-        <tbody>
-          <tr class="dia">
-              <td ng-repeat="d in ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']" class="col-sm-1">
-                {{d}}
-              </td>
-          </tr>
-          <tr class="week" ng-repeat="week in weeks">
-              <td class="fecha col-sm-1"
-              ng-class="{ 'hoy': day.isToday, 'otroMes': !day.isCurrentMonth, selected: day.date.isSame(selected) }"
-              ng-repeat="day in week.days">
-                <div class="celdaInterior">
-                  <div class="numFecha"><span ng-click="nuevo(day)" class="numFechaSpan"> {{day.number}} </span></div>
-                  <div class="valores" ng-repeat= "(maquina, array) in data[day.date.format('YYYYMMDD')]">
-                    <span ng-class="{'prensa':maquina == '1440' || maquina == '650',
-                  'pulidora':maquina =='Breton' || maquina =='Lineal',
-                  'otro':maquina !='1440' && maquina !='650' && maquina !='Breton' && maquina !='Lineal'}" >
-                    {{maquina}} : </span>
-                    <div ng-repeat="valor in array" hover>
-                      {{valor.codigo}} {{valor.valor || nada}} {{valor.unidad || nada}}
-                      <span class="glyphicon glyphicon-remove eliminar" aria-hidden="true"
-                      ng-click="eliminar(day.date.format('YYYYMMDD'),maquina, valor.codigo, $index, valor)"></span>
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
+    <h3>Calendario de produccion</h3> <br><br>
+    <div class="row titulo">
+      <div class="celdaTitulo next col-sm-1" ng-click="previous()"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></div>
+      <div class="celdaTitulo col-sm-10" colspan="5"><span>{{month.format("MMMM YYYY") | uppercase}}</span></div>
+      <div class="celdaTitulo next col-sm-1" ng-click="next()"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 colTabla">
+        <table class="table table-bordered tabla">
+          <tbody>
+            <tr class="dia">
+                <td ng-repeat="d in ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']" class="col-sm-1">
+                  {{d}}
+                </td>
+            </tr>
+            <tr class="week" ng-repeat="week in weeks">
+                <td class="fecha col-sm-1"
+                ng-class="{ 'hoy': day.isToday, 'otroMes': !day.isCurrentMonth, selected: day.date.isSame(selected) }"
+                ng-repeat="day in week.days">
+                  <div class="celdaInterior">
+                    <div class="numFecha"><span ng-click="nuevo(day)" class="numFechaSpan"> {{day.number}} </span></div>
+                    <div class="valores" ng-repeat= "(maquina, array) in data[day.date.format('YYYYMMDD')]">
+                      <span ng-class="{'prensa':maquina == '1440' || maquina == '650',
+                    'pulidora':maquina =='Breton' || maquina =='Lineal',
+                    'otro':maquina !='1440' && maquina !='650' && maquina !='Breton' && maquina !='Lineal'}" >
+                      {{maquina}} : </span>
+                      <div ng-repeat="valor in array" hover>
+                        {{valor.codigo}} {{valor.valor || nada}} {{valor.unidad || nada}}
+                        <span class="glyphicon glyphicon-remove eliminar" aria-hidden="true"
+                        ng-click="eliminar(day.date.format('YYYYMMDD'),maquina, valor.codigo, $index, valor)"></span>
+                      </div>
                     </div>
                   </div>
-                </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
-<br>
