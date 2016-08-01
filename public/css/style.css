@@ -114,6 +114,10 @@ CSS del calendario
 
 /* CSS programador de entregas*/
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .entregas {
   height: 100vh;
   overflow: auto;
