@@ -30,17 +30,13 @@ angular.module('ProgProd',['ui.router','ui.bootstrap','firebase'])
         controller: 'Entregas',
         controllerAs:'ctrlEnt',
         resolve:{
-          entregasSS: function ($window, googleAuth, $q) {
-            var defer = $q.defer();
-            $window.init= function() {
-              googleAuth.checkAuth().then(function(res){
-                console.log('api cargado');
-                defer.resolve();
+          entregasSS: function (gSS, $q) {
+            return $q(function(resolve, reject) {
+              gSS.carga().then(function(){
+                resolve();
               })
-            };
-            return defer.promise;
+            })
           }
-
         }
       }
     }

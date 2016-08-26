@@ -1,18 +1,23 @@
 angular.module('ProgProd')
 
-.controller('Entregas', function($scope, gSS, $window){
+.controller('Entregas', function($scope, googleSsData){
   console.log('arranca controlador Entregas');
-  $scope.datos = gSS.dataSS
+
+  $scope.cargaEntProg = false;
+
+  googleSsData.cargaEntProg().then(function(res){
+    $scope.datos = res;
+    $scope.items = Object.keys($scope.datos);
+    $scope.entregasProg = true;
+  })
 
   var semanaActual = (new Date()).getWeek()
-  $scope.semanas = [semanaActual, semanaActual + 1, semanaActual + 2, semanaActual + 3]
-  $scope.items = Object.keys($scope.datos)
+  $scope.semanas = [semanaActual, semanaActual + 1, semanaActual + 2, semanaActual + 3];
 
-  $scope.print = function(){
-   var table = document.getElementById('printArea').innerHTML;
-   var myWindow = $window.open('', '', 'width=800, height=600');
-   myWindow.document.write(table);
-   myWindow.print();
-  };
+  googleSsData.cargaEnProceso().then(function(res){
+    console.log(res);
+    $scope.dataEnProceso = res;
+    $scope.enProceso = true;
+  })
 
 })

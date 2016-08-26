@@ -1,8 +1,8 @@
 
 // Your Client ID can be retrieved from your project in the Google
 // Developer Console, https://console.developers.google.com
-var CLIENT_ID = '555150682260-mvj2a3esh23118k4aekt9fni7738ukdo.apps.googleusercontent.com'; //esta funciona para firebase
-//var CLIENT_ID = '555150682260-2kpu5ahoc78ph1vjs9juhmrl9fbm8u67.apps.googleusercontent.com'; //esta funciona para localhost 8000
+//var CLIENT_ID = '555150682260-mvj2a3esh23118k4aekt9fni7738ukdo.apps.googleusercontent.com'; //esta funciona para firebase
+var CLIENT_ID = '555150682260-2kpu5ahoc78ph1vjs9juhmrl9fbm8u67.apps.googleusercontent.com'; //esta funciona para localhost 8000
 
 var SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
 
