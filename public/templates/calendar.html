@@ -27,7 +27,7 @@
                     'otro':maquina !='1440' && maquina !='650' && maquina !='Breton' && maquina !='Lineal'}" >
                       {{maquina}} : </span>
                       <div ng-repeat="valor in array" hover>
-                        {{valor.codigo}} {{valor.valor || nada}} {{valor.unidad || nada}}
+                        {{valor.codigo}} <span ng-show="valor.valor"> - </span> {{valor.valor || nada}} {{valor.unidad || nada}}
                         <span class="glyphicon glyphicon-remove eliminar" aria-hidden="true"
                         ng-click="eliminar(day.date.format('YYYYMMDD'),maquina, valor.codigo, $index, valor)"></span>
                       </div>

@@ -1,9 +1,12 @@
 angular.module('ProgProd')
 
-.controller('Entregas', function($scope, googleSsData){
+.controller('Entregas', function($scope, googleSsData, googleAuth){
   console.log('arranca controlador Entregas');
 
   $scope.cargaEntProg = false;
+
+  $scope.autorizado = googleAuth.autorizado;
+  console.log($scope.autorizado);
 
   googleSsData.cargaEntProg().then(function(res){
     $scope.datos = res;

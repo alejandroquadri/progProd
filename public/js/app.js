@@ -2,8 +2,8 @@
 angular.module('ProgProd',['ui.router','ui.bootstrap','firebase'])
 
 .constant("Constants", {
-        CLIENT_ID : '555150682260-2kpu5ahoc78ph1vjs9juhmrl9fbm8u67.apps.googleusercontent.com', //esta funciona para localhost 8000
-        //CLIENT_ID : '555150682260-mvj2a3esh23118k4aekt9fni7738ukdo.apps.googleusercontent.com', //esta funciona para firebase
+        //CLIENT_ID : '555150682260-2kpu5ahoc78ph1vjs9juhmrl9fbm8u67.apps.googleusercontent.com', //esta funciona para localhost 8000
+        CLIENT_ID : '555150682260-mvj2a3esh23118k4aekt9fni7738ukdo.apps.googleusercontent.com', //esta funciona para firebase
         SCOPES : ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 })
 
@@ -33,7 +33,8 @@ angular.module('ProgProd',['ui.router','ui.bootstrap','firebase'])
           entregasSS: function ($window, googleAuth, $q) {
             var defer = $q.defer();
             $window.init= function() {
-              googleAuth.checkAuth().then(function(res){
+              googleAuth.checkAuth()
+              .then(function(res){
                 console.log('api cargado');
                 defer.resolve();
               })

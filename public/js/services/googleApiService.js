@@ -13,26 +13,33 @@ angular.module('ProgProd')
         'client_id': Constants.CLIENT_ID,
         'scope': Constants.SCOPES.join(' '),
         'immediate': true
-      }).then(function(res){
-        console.log('termino auth y carga', res);
-        o.autorizado = true;
-        var discoveryUrl = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
-        gapi.client.load(discoveryUrl).
-        then(function(){
-          defer.resolve();
-        })
+      }).then(
+        function(res){
+          console.log('termino auth y carga', res);
+          o.autorizado = true;
+          var discoveryUrl = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
+          gapi.client.load(discoveryUrl).
+          then(function(){
+            defer.resolve();
+          })
+      }, function(){
+          o.askAuth()
+          .then(function(){
+            defer.resolve();
+          })
       })
     return defer.promise;
   }
 
   o.askAuth = function(){
-    gapi.auth.authorize(
-      {client_id: Constants.CLIENT_ID, scope: Constants.SCOPES, immediate: false},
-      load)
-      .then(function(){
-        o.autorizado = true;
-      })
-    return false;
+    var defer = $q.defer();
+    gapi.auth.authorize({client_id: Constants.CLIENT_ID, scope: Constants.SCOPES, immediate: false}, function(){
+      console.log('volvio auth');
+      o.autorizado = true;
+      defer.resolve();
+      $window.location.reload();
+    })
+    return defer.promise;
   }
 
   return o;

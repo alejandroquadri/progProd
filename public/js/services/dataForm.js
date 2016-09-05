@@ -45,7 +45,8 @@ angular.module('ProgProd')
       {codigo:'9J1010K3030', descripcion:'Bloque jardin', unidad:'m2'},
       {codigo:'83RUS16 4040', descripcion:'Rustico Negro', unidad:'m2'},
       {codigo:'83RUS12 4040', descripcion:'Rustico Rojo', unidad:'m2'},
-      {codigo:'83RUS10 4040', descripcion:'Rustico Gris', unidad:'m2'}
+      {codigo:'83RUS10 4040', descripcion:'Rustico Gris', unidad:'m2'},
+      {codigo:'Mosaico 50x50', descripcion:'Mosaico 50x50', unidad:'m2'}
     ]
 
     o.maquinas = [
