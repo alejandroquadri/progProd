@@ -15,14 +15,14 @@ angular.module('ProgProd')
       codigo: this.codigo.codigo,
       valor: this.cantidad,
       unidad:this.unidad
-    })
+    });
     $scope.pasar.push({
       maquina: this.maquina,
       codigo: this.codigo.codigo,
       valor: this.cantidad,
       unidad:this.unidad,
       obj: this.codigo
-    })
+    });
     this.maquina = "";
     this.codigo = "";
     this.cantidad = "";
@@ -36,4 +36,4 @@ angular.module('ProgProd')
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-})
+});

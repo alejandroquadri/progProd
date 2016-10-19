@@ -1,12 +1,12 @@
 angular.module('ProgProd')
 
 .controller('Calendario', function($scope, $uibModal, $firebaseObject, $firebaseArray, base, dataForm){
-  var baseSync = $firebaseObject(base)
+  var baseSync = $firebaseObject(base);
   baseSync.$loaded()
   .then(function(){
     $scope.data = baseSync;
     //console.log('Sincronizado con $scope.data', $scope.data);
-  })
+  });
 
   $scope.nada = "";
 
@@ -78,7 +78,7 @@ angular.module('ProgProd')
       fecha: fecha,
       data: $scope.data,
       dataForm: dataForm
-    }
+    };
 
     //con esto abro el modal y mando la info que necesito
     var modalInstance = $uibModal.open({
@@ -104,24 +104,24 @@ angular.module('ProgProd')
           unidad: nuevos[i].unidad || "",
           descripcion: nuevos[i].obj.descripcion,
           fabricado: false
-        }
+        };
         base.child(fechaFormato+'/'+nuevos[i].maquina).push(nuevo);
       }
     }, function (ret) { //esto se usa para definir que pasa cuando cancelo el modal
       console.log('dismissed');
     });
-  }
+  };
 
   $scope.eliminar = function (fecha, maquina, codigo, index, valor){
     console.log('ret',fecha, maquina, codigo, index, valor);
-    var arreglo = $firebaseArray(base.child(fecha+'/'+maquina))
+    var arreglo = $firebaseArray(base.child(fecha+'/'+maquina));
 
     arreglo.$loaded().then(function(){
-      var item = arreglo[index]
+      var item = arreglo[index];
       return item;
     })
     .then(function(item){
-      arreglo.$remove(item)
+      arreglo.$remove(item);
       console.log('borrado');
     })
     .then(function(){
@@ -130,5 +130,5 @@ angular.module('ProgProd')
     .then(function(){
       console.log('desincronizado');
     });
-  }
-})
+  };
+});

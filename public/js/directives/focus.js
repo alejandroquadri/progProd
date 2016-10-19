@@ -6,9 +6,9 @@ angular.module('ProgProd')
     link: function (scope, elem) {
 
       elem.on('submit', function () {
-        var primero = angular.element(document.querySelector('#maquina'))
+        var primero = angular.element(document.querySelector('#maquina'));
         primero.focus();
-      })
+      });
     }
   };
 });
