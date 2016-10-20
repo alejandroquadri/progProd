@@ -16,8 +16,8 @@ CSS del calendario
 }
 
 .colTabla{
-  padding-right: 0px;
-  padding-left: 0px;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .celdaTitulo {
@@ -97,6 +97,15 @@ CSS del calendario
 }
 
 .eliminar:hover {
+  cursor: pointer;
+}
+
+.update {
+  color: rgba(22, 88, 176, 0.87);
+  visibility: hidden;
+}
+
+.update:hover {
   cursor: pointer;
 }
 

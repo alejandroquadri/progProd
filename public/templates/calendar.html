@@ -33,6 +33,8 @@
                       <div ng-repeat="valor in array" hover>
                         {{valor.codigo}} <span ng-show="valor.valor"> - </span> {{valor.valor || nada}} {{valor.unidad || nada}}
                         <span ng-show="valor.observacion"> - </span> {{valor.observacion || nada}}
+                        <span class="glyphicon glyphicon-pencil update" aria-hidden="true"
+                        ng-click="update(day.date.format('YYYYMMDD'),maquina, valor.codigo, $index, valor)"></span>
                         <span class="glyphicon glyphicon-remove eliminar" aria-hidden="true"
                         ng-click="eliminar(day.date.format('YYYYMMDD'),maquina, valor.codigo, $index, valor)"></span>
                       </div>

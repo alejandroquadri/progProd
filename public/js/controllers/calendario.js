@@ -8,6 +8,8 @@ angular.module('ProgProd')
     $scope.data = baseSync;
   });
 
+  $scope.JSONdataForm = JSON.stringify(dataForm);
+
   $scope.vForm = false;
 
   $scope.datos = {
@@ -19,6 +21,8 @@ angular.module('ProgProd')
     observacion: ""
   };
 
+  $scope.nada = "";
+
   $scope.nuevo = function(fecha){
     $scope.vForm = true;
     $scope.datos.fecha = fecha.date._d;
@@ -28,8 +32,6 @@ angular.module('ProgProd')
     console.log('oculta');
     $scope.vForm = false;
   };
-
-  $scope.JSONdataForm = JSON.stringify(dataForm);
 
   $scope.save = function (data) {
     // lo conveirto ayudandome con la biblioteca moment al formato YYYYMMDD
@@ -51,7 +53,6 @@ angular.module('ProgProd')
 
   };
 
-  $scope.nada = "";
 
   $scope.selected = _removeTime($scope.selected || moment());
   $scope.month = $scope.selected.clone();
@@ -128,5 +129,9 @@ angular.module('ProgProd')
     .then(function(){
       console.log('desincronizado');
     });
+  };
+
+  $scope.update = function (fecha, maquina, codigo, index, valor){
+    console.log('ret',fecha, maquina, codigo, index, valor);
   };
 });

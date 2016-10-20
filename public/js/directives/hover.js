@@ -6,12 +6,14 @@ angular.module('ProgProd')
     link: function (scope, element, attr) {
       $(element).hover(
         function () {
-            $(this).find('span.eliminar').css('visibility','visible')//.addClass('hovering');
+            $(this).find('span.eliminar').css('visibility','visible');//.addClass('hovering');
+            $(this).find('span.update').css('visibility','visible');
         },
         function () {
-            $(this).find('span.eliminar').css('visibility','hidden')//.removeClass('hovering');
+            $(this).find('span.eliminar').css('visibility','hidden');//.removeClass('hovering');
+            $(this).find('span.update').css('visibility','hidden');
         }
       );
     }
-  }
-})
+  };
+});
