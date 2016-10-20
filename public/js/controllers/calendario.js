@@ -1,12 +1,29 @@
 angular.module('ProgProd')
 
 .controller('Calendario', function($scope, $uibModal, $firebaseObject, $firebaseArray, base, dataForm){
+
   var baseSync = $firebaseObject(base);
   baseSync.$loaded()
   .then(function(){
     $scope.data = baseSync;
     //console.log('Sincronizado con $scope.data', $scope.data);
   });
+
+  $scope.fecha = moment();
+
+  // $scope.datosNecesarios = 'hola';// JSON.stringify(dataForm);
+  // console.log('datosNecesarios', datosNecesarios);
+
+  $scope.JSONdataForm = JSON.stringify(dataForm);
+
+  $scope.callHome = function (data) {
+    alert(JSON.stringify(data));
+  };
+
+  $scope.enCero = function() {
+    console.log('click!');
+    $scope.pepe = {};
+  };
 
   $scope.nada = "";
 
