@@ -5,27 +5,30 @@ angular.module('ProgProd')
     restrict: "E",
     templateUrl: "../templates/formulario.html",
     scope: {
-        fecha: "=",
+        datos: "=",
         input: "@",
-        output: "&"
+        output: "&",
+        ocultar: "&"
     },
     link: function(scope) {
       scope.dataForm = JSON.parse(scope.input);
 
       scope.submit = function () {
         scope.output({data: {
-          maquina: this.maquina,
-          codigo: this.codigo.codigo,
-          valor: this.cantidad,
-          unidad:this.unidad,
-          observacion:this.observacion
+          fecha: scope.datos.fecha,
+          maquina: scope.datos.maquina,
+          codigo: scope.datos.codigo.codigo,
+          valor: scope.datos.cantidad,
+          unidad:scope.datos.unidad,
+          observacion:scope.datos.observacion
         }});
 
-        this.maquina = "";
-        this.codigo = "";
-        this.cantidad = "";
-        this.unidad = "";
-        this.observacion = "";
+        // this.fecha = "";
+        scope.datos.maquina = "";
+        scope.datos.codigo = "";
+        scope.datos.cantidad = "";
+        scope.datos.unidad = "";
+        scope.datos.observacion = "";
         scope.form.$setPristine();
 
       };

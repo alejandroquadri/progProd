@@ -6,23 +6,49 @@ angular.module('ProgProd')
   baseSync.$loaded()
   .then(function(){
     $scope.data = baseSync;
-    //console.log('Sincronizado con $scope.data', $scope.data);
   });
 
-  $scope.fecha = moment();
+  $scope.vForm = false;
 
-  // $scope.datosNecesarios = 'hola';// JSON.stringify(dataForm);
-  // console.log('datosNecesarios', datosNecesarios);
+  $scope.datos = {
+    fecha: new Date(),
+    maquina: "",
+    codigo: "",
+    valor: "",
+    unidad:"",
+    observacion: ""
+  };
+
+  $scope.nuevo = function(fecha){
+    $scope.vForm = true;
+    $scope.datos.fecha = fecha.date._d;
+  };
+
+  $scope.ocultar = function(){
+    console.log('oculta');
+    $scope.vForm = false;
+  };
 
   $scope.JSONdataForm = JSON.stringify(dataForm);
 
-  $scope.callHome = function (data) {
-    alert(JSON.stringify(data));
-  };
+  $scope.save = function (data) {
+    // lo conveirto ayudandome con la biblioteca moment al formato YYYYMMDD
+    var fechaF = moment(data.fecha).format("YYYYMMDD");
+    // cambio el atributo fecha en el obejto para poderlo guardar
+    data.fecha = fechaF;
 
-  $scope.enCero = function() {
-    console.log('click!');
-    $scope.pepe = {};
+    console.log('valor', data.valor);
+
+    var nuevo = {
+      codigo: data.codigo,
+      valor: data.valor || "",
+      unidad: data.unidad || "",
+      observacion: data.observacion || ""
+    };
+    console.log('data', data);
+    console.log('nuevo', nuevo);
+    base.child(data.fecha+'/'+data.maquina).push(nuevo);
+
   };
 
   $scope.nada = "";
@@ -83,51 +109,6 @@ angular.module('ProgProd')
       }
       return days;
   }
-
-  $scope.animationsEnabled = true; //esto para que el modal tenga ese efecto que viene de arriba
-
-  $scope.nuevo = function (fecha){
-
-    $scope.selected = fecha.date;
-
-    //este objeto lo uso para mandar datos al modal
-     var modal = {
-      fecha: fecha,
-      data: $scope.data,
-      dataForm: dataForm
-    };
-
-    //con esto abro el modal y mando la info que necesito
-    var modalInstance = $uibModal.open({
-      animation: $scope.animationsEnabled,
-      templateUrl: 'templates/cargaProduccion.html',
-      controller: 'InstanciaModal',
-      size: 'lg',
-      resolve: {
-        modal: function () {
-          return modal;
-        }
-      }
-    });
-
-    //con esta funcion digo que es lo que pasa con lo que vuelve del modal
-    modalInstance.result.then(function (nuevos) {
-      var fechaFormato = fecha.date.format("YYYYMMDD");
-
-      for (var i=0; i < nuevos.length ; i ++) {
-        var nuevo = {
-          codigo: nuevos[i].codigo,
-          valor: nuevos[i].valor || "",
-          unidad: nuevos[i].unidad || "",
-          descripcion: nuevos[i].obj.descripcion,
-          fabricado: false
-        };
-        base.child(fechaFormato+'/'+nuevos[i].maquina).push(nuevo);
-      }
-    }, function (ret) { //esto se usa para definir que pasa cuando cancelo el modal
-      console.log('dismissed');
-    });
-  };
 
   $scope.eliminar = function (fecha, maquina, codigo, index, valor){
     console.log('ret',fecha, maquina, codigo, index, valor);

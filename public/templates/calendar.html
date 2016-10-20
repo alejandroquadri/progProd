@@ -2,9 +2,8 @@
   <div class="col-lg-10 col-lg-offset-1">
     <h3>Calendario de produccion</h3> <br><br>
 
-    <formulario fecha="pepe" input="{{JSONdataForm}}"
-    output="callHome(data)"></formulario><br>
-    <button ng-click="enCero()">En Cero</button>
+    <formulario ng-show="vForm" datos="datos" input="{{JSONdataForm}}"
+    output="save(data)" ocultar="ocultar()"></formulario><br>
 
     <div class="row titulo">
       <div class="celdaTitulo next col-sm-1" ng-click="previous()"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></div>
@@ -33,6 +32,7 @@
                       {{maquina}} : </span>
                       <div ng-repeat="valor in array" hover>
                         {{valor.codigo}} <span ng-show="valor.valor"> - </span> {{valor.valor || nada}} {{valor.unidad || nada}}
+                        <span ng-show="valor.observacion"> - </span> {{valor.observacion || nada}}
                         <span class="glyphicon glyphicon-remove eliminar" aria-hidden="true"
                         ng-click="eliminar(day.date.format('YYYYMMDD'),maquina, valor.codigo, $index, valor)"></span>
                       </div>

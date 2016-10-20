@@ -1,50 +1,44 @@
-<p>
-Nombre: {{fecha.nombre}}<br>
-Apellido: {{fecha.apellido}}<br>
-<button type="button" name="button" ng-click="mandarlo()">Prueba</button>
-</p>
-
 <div class="row">
   <form focus name="form" ng-model="form" ng-submit="submit()">
 
     <div class="row">
-      
-    </div>
-
-    <div class="row">
-      <div class="form-group col-sm-6">
+      <div class="form-group col-sm-2">
+        <label for="fecha">Fecha</label>
+        <input type="date" class="form-control input-sm" id="fecha" ng-model="datos.fecha">
+      </div>
+      <div class="form-group col-sm-2">
         <label for="maquina">Maquina / Proceso</label>
-        <select id="maquina" class="form-control" ng-model="maquina" name="maquina " ng-options="maquina for maquina in dataForm.maquinas | orderBy:'toString()'" autofocus required>
+        <select id="maquina" class="form-control input-sm" ng-model="datos.maquina" name="maquina " ng-options="maquina for maquina in dataForm.maquinas | orderBy:'toString()'" autofocus required>
         </select>
       </div>
-      <div class="form-group col-sm-6">
+      <div class="form-group col-sm-2">
         <label for="codigo">Codigo</label>
-        <select id="codigo" class="form-control" ng-model="codigo" name="codigo" ng-options="item.codigo+' - '+item.descripcion for item in dataForm.items | orderBy:'codigo'" required>
+        <select id="codigo" class="form-control input-sm" ng-model="datos.codigo" name="codigo" ng-options="item.codigo+' - '+item.descripcion for item in dataForm.items | orderBy:'codigo'" required>
         </select>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="form-group col-sm-6">
+      <div class="form-group col-sm-1">
         <label for="cantidad">Cantidad</label>
-        <input type="text" class="form-control" id="cantidad" ng-model="cantidad">
+        <input type="text" class="form-control input-sm" id="cantidad" ng-model="datos.cantidad">
       </div>
-      <div class="form-group col-sm-6">
+      <div class="form-group col-sm-1">
         <label for="unidad">Unidad</label>
-        <select id="unidad" class="form-control" ng-model="unidad" name="unidad" ng-options="unidad for unidad in dataForm.unidades | orderBy:'toString()'" required>
+        <select id="unidad" class="form-control input-sm" ng-model="datos.unidad" name="unidad" ng-options="unidad for unidad in dataForm.unidades | orderBy:'toString()'" required>
         </select>
+      </div>
+      <div class="form-group col-sm-4">
+        <label for="unidad">Observacion</label>
+        <input type="text" class="form-control input-sm" id="observacion" ng-model="datos.observacion">
       </div>
     </div>
 
     <div class="row">
-      <div class="form-group col-sm-12">
-        <label for="unidad">Observacion</label>
-        <input type="text" class="form-control" id="observacion" ng-model="observacion">
+      <div class="form-group col-sm-4">
+        <div class="btn-group inline pull-left">
+          <input ng-disabled="form.maquina.$invalid || form.codigo.$invalid" class="btn btn-success btn-sm" type="submit" id="submit" value="Agregar"/>
+          <button type="button" name="ocultar" ng-click="ocultar()" class="btn btn-warning btn-sm">Ocultar</button>
+        </div>
       </div>
     </div>
 
-    <div class="col-sm-6">
-      <input ng-disabled="form.maquina.$invalid || form.codigo.$invalid" class="btn btn-primary" type="submit" id="submit" value="Agregar"/>
-    </div>
   </form>
 </div>
