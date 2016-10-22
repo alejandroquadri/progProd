@@ -1,6 +1,6 @@
 angular.module('ProgProd')
 
-.controller('Calendario', function($scope, $uibModal, $firebaseObject, $firebaseArray, base, dataForm){
+.controller('Calendario', function($scope, $firebaseObject, $firebaseArray, base, dataForm){
 
   var baseSync = $firebaseObject(base);
   baseSync.$loaded()
@@ -10,13 +10,21 @@ angular.module('ProgProd')
 
   $scope.JSONdataForm = JSON.stringify(dataForm);
 
-  $scope.vForm = false;
+  $scope.visible = {
+    formulario: false,
+    agregar: true,
+    update: false
+  };
 
   $scope.datos = {
     fecha: new Date(),
     maquina: "",
-    codigo: "",
-    valor: "",
+    codigo: {
+      codigo: "",
+      descripcion:"",
+      unidad:""
+    },
+    cantidad: "",
     unidad:"",
     observacion: ""
   };
@@ -24,16 +32,24 @@ angular.module('ProgProd')
   $scope.nada = "";
 
   $scope.nuevo = function(fecha){
-    $scope.vForm = true;
+    $scope.visible.update = false;
+    $scope.visible.agregar = true;
+    $scope.visible.formulario = true;
     $scope.datos.fecha = fecha.date._d;
+    $scope.datos.maquina = '';
+    $scope.datos.codigo.codigo = '';
+    $scope.datos.codigo.descripcion = '';
+    $scope.datos.cantidad = '';
+    $scope.datos.unidad = '';
+    $scope.datos.observacion = '';
   };
 
   $scope.ocultar = function(){
-    console.log('oculta');
-    $scope.vForm = false;
+    $scope.visible.formulario = false;
   };
 
   $scope.save = function (data) {
+    console.log(data);
     // lo conveirto ayudandome con la biblioteca moment al formato YYYYMMDD
     var fechaF = moment(data.fecha).format("YYYYMMDD");
     // cambio el atributo fecha en el obejto para poderlo guardar
@@ -43,6 +59,7 @@ angular.module('ProgProd')
 
     var nuevo = {
       codigo: data.codigo,
+      descripcion: data.descripcion,
       valor: data.valor || "",
       unidad: data.unidad || "",
       observacion: data.observacion || ""
@@ -53,6 +70,75 @@ angular.module('ProgProd')
 
   };
 
+
+
+  $scope.eliminar = function (fecha, maquina, codigo, index, valor){
+    console.log('ret',fecha, maquina, codigo, index, valor);
+    var arreglo = $firebaseArray(base.child(fecha+'/'+maquina));
+
+    arreglo.$loaded().then(function(){
+      var item = arreglo[index];
+      return item;
+    })
+    .then(function(item){
+      arreglo.$remove(item);
+      console.log('borrado');
+    })
+    .then(function(){
+      arreglo.$destroy();
+    })
+    .then(function(){
+      console.log('desincronizado');
+    });
+  };
+
+  $scope.openUpdate = function (fecha, maquina, codigo, index, valor){
+    //console.log('ret',fecha, maquina, codigo, index, valor);
+
+    var fechaFor = fecha.format('YYYYMMDD');
+
+    $scope.modificar = {
+      index: index,
+      fecha: fecha,
+      maquina: maquina,
+      itemViejo: valor
+    };
+
+    $scope.visible.update = true;
+    $scope.visible.agregar = false;
+    $scope.visible.formulario = true;
+
+    $scope.datos.fecha = fecha._d;
+    $scope.datos.maquina = maquina;
+    $scope.datos.codigo.codigo = valor.codigo;
+    $scope.datos.codigo.descripcion = valor.descripcion;
+    $scope.datos.cantidad = valor.valor;
+    $scope.datos.unidad = valor.unidad;
+
+  };
+
+  $scope.update = function(data){
+    console.log('corre update');
+    var fechaFor = $scope.modificar.fecha.format('YYYYMMDD');
+    var arreglo = $firebaseArray(base.child(fechaFor+'/'+$scope.modificar.maquina));
+
+    arreglo.$loaded()
+    .then(function(){
+      var item = arreglo[$scope.modificar.index];
+      return item;
+    })
+    .then(function(item){
+      arreglo.$remove(item);
+      console.log('borrado');
+    })
+    .then(function(){
+      arreglo.$destroy();
+    })
+    .then(function(){
+      console.log('desincronizado');
+      $scope.save(data);
+    });
+  };
 
   $scope.selected = _removeTime($scope.selected || moment());
   $scope.month = $scope.selected.clone();
@@ -111,27 +197,4 @@ angular.module('ProgProd')
       return days;
   }
 
-  $scope.eliminar = function (fecha, maquina, codigo, index, valor){
-    console.log('ret',fecha, maquina, codigo, index, valor);
-    var arreglo = $firebaseArray(base.child(fecha+'/'+maquina));
-
-    arreglo.$loaded().then(function(){
-      var item = arreglo[index];
-      return item;
-    })
-    .then(function(item){
-      arreglo.$remove(item);
-      console.log('borrado');
-    })
-    .then(function(){
-      arreglo.$destroy();
-    })
-    .then(function(){
-      console.log('desincronizado');
-    });
-  };
-
-  $scope.update = function (fecha, maquina, codigo, index, valor){
-    console.log('ret',fecha, maquina, codigo, index, valor);
-  };
 });

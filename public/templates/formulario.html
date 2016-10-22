@@ -7,13 +7,15 @@
         <input type="date" class="form-control input-sm" id="fecha" ng-model="datos.fecha">
       </div>
       <div class="form-group col-sm-2">
-        <label for="maquina">Maquina / Proceso</label>
-        <select id="maquina" class="form-control input-sm" ng-model="datos.maquina" name="maquina " ng-options="maquina for maquina in dataForm.maquinas | orderBy:'toString()'" autofocus required>
+        <label for="maquina">Maquina</label>
+        <select id="maquina" class="form-control input-sm" ng-model="datos.maquina" name="maquina "
+        ng-options="maquina for maquina in dataForm.maquinas | orderBy:'toString()'" autofocus required>
         </select>
       </div>
       <div class="form-group col-sm-2">
         <label for="codigo">Codigo</label>
-        <select id="codigo" class="form-control input-sm" ng-model="datos.codigo" name="codigo" ng-options="item.codigo+' - '+item.descripcion for item in dataForm.items | orderBy:'codigo'" required>
+        <select id="codigo" class="form-control input-sm" ng-model="datos.codigo" name="codigo"
+        ng-options="item.codigo+' - '+item.descripcion for item in dataForm.items | orderBy:'codigo'" required>
         </select>
       </div>
       <div class="form-group col-sm-1">
@@ -22,7 +24,8 @@
       </div>
       <div class="form-group col-sm-1">
         <label for="unidad">Unidad</label>
-        <select id="unidad" class="form-control input-sm" ng-model="datos.unidad" name="unidad" ng-options="unidad for unidad in dataForm.unidades | orderBy:'toString()'" required>
+        <select id="unidad" class="form-control input-sm" ng-model="datos.unidad" name="unidad"
+        ng-options="unidad for unidad in dataForm.unidades | orderBy:'toString()'" required>
         </select>
       </div>
       <div class="form-group col-sm-4">
@@ -31,14 +34,13 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="form-group col-sm-4">
-        <div class="btn-group inline pull-left">
-          <input ng-disabled="form.maquina.$invalid || form.codigo.$invalid" class="btn btn-success btn-sm" type="submit" id="submit" value="Agregar"/>
-          <button type="button" name="ocultar" ng-click="ocultar()" class="btn btn-warning btn-sm">Ocultar</button>
-        </div>
-      </div>
-    </div>
+    <button ng-disabled="form.maquina.$invalid || form.codigo.$invalid" ng-show="visible.agregar"
+    nclass="btn btn-success btn-sm" type="submit" id="submit" ng-click= "submit()">Agregar
+    </button>
+    <button type="button" name="update" ng-click="mandaUpdate()" class="btn btn-primary btn-sm"
+    ng-disabled="form.maquina.$invalid || form.codigo.$invalid" ng-show="visible.update">Actualizar</button>
+    <button type="button" name="ocultar" ng-click="ocultar()" class="btn btn-warning btn-sm">Ocultar</button>
+
 
   </form>
 </div>

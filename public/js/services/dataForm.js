@@ -5,6 +5,7 @@ angular.module('ProgProd')
     var o = {};
 
     o.items = [
+      {codigo:'', descripcion:'', unidad:''},
       {codigo:'83ADRP324040', descripcion:'64 P Brechiato', unidad:'m2'},
       {codigo:'83ADRP114040', descripcion:'64 P Blanco', unidad:'m2'},
       {codigo:'83ADRP724040', descripcion:'64 P Blanco Espuma', unidad:'m2'},
@@ -47,7 +48,7 @@ angular.module('ProgProd')
       {codigo:'83RUS12 4040', descripcion:'Rustico Rojo', unidad:'m2'},
       {codigo:'83RUS10 4040', descripcion:'Rustico Gris', unidad:'m2'},
       {codigo:'Mosaico 50x50', descripcion:'Mosaico 50x50', unidad:'m2'}
-    ]
+    ];
 
     o.maquinas = [
       '1440',
@@ -62,17 +63,18 @@ angular.module('ProgProd')
       'Granalladora',
       'Molde',
       'Escalera'
-    ]
+    ];
 
     o.unidades = [
+      '',
       'litros',
       'ml',
       'unidad',
       'm2',
       'kg',
       'bolsa'
-    ]
+    ];
 
     return o;
 
-  })
+  });

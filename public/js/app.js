@@ -20,7 +20,6 @@ angular.module('ProgProd',['ui.router','ui.bootstrap','firebase'])
         controllerAs:'ctrlCal',
         resolve:{
           base: function () {
-            console.log('resolveCalendario');
             return firebase.database().ref('programa');
           }
         }
@@ -35,7 +34,6 @@ angular.module('ProgProd',['ui.router','ui.bootstrap','firebase'])
             $window.init= function() {
               googleAuth.checkAuth()
               .then(function(res){
-                console.log('api cargado');
                 defer.resolve();
               });
             };

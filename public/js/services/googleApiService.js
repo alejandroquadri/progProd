@@ -15,21 +15,20 @@ angular.module('ProgProd')
         'immediate': true
       }).then(
         function(res){
-          console.log('termino auth y carga', res);
           o.autorizado = true;
           var discoveryUrl = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
           gapi.client.load(discoveryUrl).
           then(function(){
             defer.resolve();
-          })
+          });
       }, function(){
           o.askAuth()
           .then(function(){
             defer.resolve();
-          })
-      })
+          });
+      });
     return defer.promise;
-  }
+  };
 
   o.askAuth = function(){
     var defer = $q.defer();
@@ -38,9 +37,9 @@ angular.module('ProgProd')
       o.autorizado = true;
       defer.resolve();
       $window.location.reload();
-    })
+    });
     return defer.promise;
-  }
+  };
 
   return o;
 
@@ -61,7 +60,7 @@ angular.module('ProgProd')
     });
 
     return defer.promise;
-  }
+  };
 
   o.cargaEnProceso = function(){
     var defer = $q.defer();
@@ -70,12 +69,12 @@ angular.module('ProgProd')
       range: 'Expo!A:B'
     }).then(function(response) {
       var data = response.result.values;
-      console.log(data);
+      //console.log(data);
       defer.resolve(data);
     });
 
     return defer.promise;
-  }
+  };
 
   Date.prototype.getWeek = function() {
   var date = new Date(this.getTime());
@@ -85,9 +84,8 @@ angular.module('ProgProd')
   // January 4 is always in week 1.
   var week1 = new Date(date.getFullYear(), 0, 4);
   // Adjust to Thursday in week 1 and count number of weeks from date to week1.
-  return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
-                        - 3 + (week1.getDay() + 6) % 7) / 7);
-  }
+  return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+  };
 
   function sumaSemana(datos){
     //var datos = $scope.dataSS;
@@ -101,23 +99,23 @@ angular.module('ProgProd')
         var valor = datos[i][j];
 
         if (valor === "" || !valor) {continue;}
-        valor = parseFloat(datos[i][j].replace(/,/g, '.'))
+        valor = parseFloat(datos[i][j].replace(/,/g, '.'));
         if (valor >= 0) {continue;}
         var fechaString = titulos[j];
 
-        var fecha = new Date()
-        fecha.setDate(fechaString.substring(5, 7))
-        fecha.setMonth(fechaString.substring(8, 10)-1)
+        var fecha = new Date();
+        fecha.setDate(fechaString.substring(5, 7));
+        fecha.setMonth(fechaString.substring(8, 10)-1);
 
         if (!(datos[i][3] in artXSem)) {
           artXSem[datos[i][3]] = {};
           if (!(fecha.getWeek() in artXSem[datos[i][3]])){
             artXSem[datos[i][3]][fecha.getWeek()] = Math.abs(valor);
-          } else { artXSem[datos[i][3]][fecha.getWeek()] += Math.abs(valor)}
+          } else { artXSem[datos[i][3]][fecha.getWeek()] += Math.abs(valor);}
         } else  {
           if (!(fecha.getWeek() in artXSem[datos[i][3]])){
             artXSem[datos[i][3]][fecha.getWeek()] = Math.abs(valor);
-          } else { artXSem[datos[i][3]][fecha.getWeek()] += Math.abs(valor)}
+          } else { artXSem[datos[i][3]][fecha.getWeek()] += Math.abs(valor);}
         }
       }
     }
@@ -126,4 +124,4 @@ angular.module('ProgProd')
   }
 
   return o;
-})
+});
