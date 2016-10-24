@@ -13,8 +13,8 @@
         </select>
       </div>
       <div class="form-group col-sm-2">
-        <label for="codigo">Codigo</label>
-        <select id="codigo" class="form-control input-sm" ng-model="datos.codigo" name="codigo"
+        <label for="item">Codigo</label>
+        <select id="item" class="form-control input-sm" ng-model="datos.item" name="item"
         ng-options="item.codigo+' - '+item.descripcion for item in dataForm.items | orderBy:'codigo'" required>
         </select>
       </div>
@@ -34,12 +34,11 @@
       </div>
     </div>
 
-    <button ng-disabled="form.maquina.$invalid || form.codigo.$invalid" ng-show="visible.agregar"
-    class="btn btn-success btn-sm" type="button" ng-click=agrega()>Agregar
+    <button ng-disabled="form.maquina.$invalid || form.codigo.$invalid"
+    ng-class="{'btn btn-success btn-sm': config.nuevo , 'btn btn-primary btn-sm' : config.update}" type="submit">
+    {{config.nuevo? 'Agregar' : 'Actualizar'}}
     </button>
-    <button type="button" name="update" ng-click="mandaUpdate()" class="btn btn-primary btn-sm"
-    ng-disabled="form.maquina.$invalid || form.codigo.$invalid" ng-show="visible.update">Actualizar</button>
-    <button type="button" name="ocultar" ng-click="ocultar()" class="btn btn-warning btn-sm">Ocultar</button>
+    <button type="button" ng-click="ocultar()" class="btn btn-warning btn-sm">Ocultar</button>
 
 
   </form>
