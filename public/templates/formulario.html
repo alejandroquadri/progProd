@@ -35,7 +35,7 @@
     </div>
 
     <button ng-disabled="form.maquina.$invalid || form.codigo.$invalid" ng-show="visible.agregar"
-    nclass="btn btn-success btn-sm" type="submit" id="submit" ng-click= "submit()">Agregar
+    class="btn btn-success btn-sm" type="button" ng-click=agrega()>Agregar
     </button>
     <button type="button" name="update" ng-click="mandaUpdate()" class="btn btn-primary btn-sm"
     ng-disabled="form.maquina.$invalid || form.codigo.$invalid" ng-show="visible.update">Actualizar</button>

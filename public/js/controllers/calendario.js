@@ -114,6 +114,7 @@ angular.module('ProgProd')
     $scope.datos.codigo.descripcion = valor.descripcion;
     $scope.datos.cantidad = valor.valor;
     $scope.datos.unidad = valor.unidad;
+    $scope.datos.observacion = valor.observacion;
 
   };
 
