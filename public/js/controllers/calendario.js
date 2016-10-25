@@ -58,7 +58,6 @@ angular.module('ProgProd')
       index: index,
       fecha: fecha,
       maquina: maquina,
-      itemViejo: valor
     };
 
     $scope.config.update = true;
@@ -76,7 +75,7 @@ angular.module('ProgProd')
   };
 
   $scope.output = function(data){
-    console.log(data.datos);
+    //console.log(data.datos);
 
     if ($scope.config.nuevo) {
       console.log('nuevo');
@@ -90,7 +89,7 @@ angular.module('ProgProd')
   };
 
   function save(data) {
-    console.log(data);
+    console.log('corre save');
     // lo conveirto ayudandome con la biblioteca moment al formato YYYYMMDD
     var fechaF = moment(data.fecha).format("YYYYMMDD");
 
@@ -101,8 +100,23 @@ angular.module('ProgProd')
       unidad: data.unidad || "",
       observacion: data.observacion || ""
     };
-    base.child(fechaF+'/'+data.maquina).push(nuevo);
-    console.log('nuevo', nuevo);
+    //base.child(fechaF+'/'+data.maquina).push(nuevo);
+
+    var list = $firebaseArray(base.child(fechaF+'/'+data.maquina));
+    list.$add(nuevo)
+    .then(function(item){
+      console.log('guardado');
+      if($scope.config.update){
+        console.log('actualiza datos');
+        $scope.config.configUpdate.fecha = moment(data.fecha);
+        $scope.config.configUpdate.maquina = data.maquina;
+        $scope.config.configUpdate.index = list.$indexFor(item.key);
+      }
+      list.$destroy();
+    })
+    .then( function(){
+      console.log('destruido list');
+    });
   }
 
   $scope.eliminar = function (fecha, maquina, codigo, index, valor){
@@ -112,7 +126,6 @@ angular.module('ProgProd')
 
     arreglo.$loaded().then(function(){
       var item = arreglo[index];
-      console.log('item', item);
       return item;
     })
     .then(function(item){
@@ -133,19 +146,18 @@ angular.module('ProgProd')
     // var fechaFor = moment(data.fecha).format("YYYYMMDD");
 
     var arreglo = $firebaseArray(base.child(fechaFor+'/'+$scope.config.configUpdate.maquina));
-    console.log('arreglo', arreglo);
 
     arreglo.$loaded()
     .then(function(){
       var item = arreglo[$scope.config.configUpdate.index];
-      console.log('item', item);
+      //console.log('item', item);
       return item;
     })
     .then(function(item){
       arreglo.$remove(item);
-      console.log('borrado');
     })
     .then(function(){
+      console.log('borrado');
       arreglo.$destroy();
     })
     .then(function(){
