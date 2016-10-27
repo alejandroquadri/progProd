@@ -21,11 +21,7 @@ angular.module('ProgProd')
   $scope.datos = {
     fecha: new Date(),
     maquina: "",
-    item: {
-      codigo: "",
-      descripcion:"",
-      unidad:""
-    },
+    item: "",
     cantidad: "",
     unidad:"",
     observacion: ""
@@ -40,17 +36,16 @@ angular.module('ProgProd')
     $scope.config.nuevo = true;
     $scope.config.formulario = true;
 
+
     $scope.datos.fecha = fecha.date._d;
     $scope.datos.maquina = '';
-    $scope.datos.item.codigo = '';
-    $scope.datos.item.descripcion = '';
+    $scope.datos.item = '';
     $scope.datos.cantidad = '';
     $scope.datos.unidad = '';
     $scope.datos.observacion = '';
   };
 
   $scope.openUpdate = function (fecha, maquina, codigo, index, valor){
-    //console.log('ret',fecha, maquina, codigo, index, valor);
 
     var fechaFor = fecha.format('YYYYMMDD');
 
@@ -66,8 +61,7 @@ angular.module('ProgProd')
 
     $scope.datos.fecha = fecha._d;
     $scope.datos.maquina = maquina;
-    $scope.datos.item.codigo = valor.codigo;
-    $scope.datos.item.descripcion = valor.descripcion;
+    $scope.datos.item = codigo;
     $scope.datos.cantidad = valor.valor;
     $scope.datos.unidad = valor.unidad;
     $scope.datos.observacion = valor.observacion;
@@ -94,8 +88,7 @@ angular.module('ProgProd')
     var fechaF = moment(data.fecha).format("YYYYMMDD");
 
     var nuevo = {
-      codigo: data.item.codigo,
-      descripcion: data.item.descripcion,
+      codigo: data.item,
       valor: data.cantidad || "",
       unidad: data.unidad || "",
       observacion: data.observacion || ""

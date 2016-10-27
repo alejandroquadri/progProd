@@ -5,7 +5,6 @@ angular.module('ProgProd')
     var o = {};
 
     o.items = [
-      {codigo:'', descripcion:'', unidad:''},
       {codigo:'83ADRP324040', descripcion:'64 P Brechiato', unidad:'m2'},
       {codigo:'83ADRP114040', descripcion:'64 P Blanco', unidad:'m2'},
       {codigo:'83ADRP724040', descripcion:'64 P Blanco Espuma', unidad:'m2'},

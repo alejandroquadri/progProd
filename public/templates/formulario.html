@@ -15,7 +15,7 @@
       <div class="form-group col-sm-2">
         <label for="item">Codigo</label>
         <select id="item" class="form-control input-sm" ng-model="datos.item" name="item"
-        ng-options="item.codigo+' - '+item.descripcion for item in dataForm.items | orderBy:'codigo'" required>
+        ng-options="item.codigo as item.codigo+' - '+item.descripcion for item in dataForm.items | orderBy:'codigo'" required>
         </select>
       </div>
       <div class="form-group col-sm-1">
