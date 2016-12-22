@@ -112,22 +112,16 @@ angular.module('ProgProd')
         var fecha = new Date();
         fecha.setDate(fechaString.substring(5, 7));
         fecha.setMonth(fechaString.substring(8, 10)-1);
-        fecha.setFullYear("20"+fechaString.substring(11, 13));
 
-        // tipo de formato que trae jue. 22/12/16
-
-        var codigo = datos[i][3];
-        var semana = fecha.getWeekYear()+""+fecha.getWeek();
-
-        if (!(codigo in artXSem)) {
-          artXSem[codigo] = {};
-          if (!(semana in artXSem[codigo])){
-            artXSem[codigo][semana] = Math.abs(valor);
-          } else { artXSem[codigo][semana] += Math.abs(valor);}
+        if (!(datos[i][3] in artXSem)) {
+          artXSem[datos[i][3]] = {};
+          if (!(fecha.getWeek() in artXSem[datos[i][3]])){
+            artXSem[datos[i][3]][fecha.getWeek()] = Math.abs(valor);
+          } else { artXSem[datos[i][3]][fecha.getWeek()] += Math.abs(valor);}
         } else  {
-          if (!(semana in artXSem[codigo])){
-            artXSem[codigo][semana] = Math.abs(valor);
-          } else { artXSem[codigo][semana] += Math.abs(valor);}
+          if (!(fecha.getWeek() in artXSem[datos[i][3]])){
+            artXSem[datos[i][3]][fecha.getWeek()] = Math.abs(valor);
+          } else { artXSem[datos[i][3]][fecha.getWeek()] += Math.abs(valor);}
         }
       }
     }

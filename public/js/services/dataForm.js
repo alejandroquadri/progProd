@@ -20,6 +20,7 @@ angular.module('ProgProd')
       {codigo:'2717S   4040', descripcion:'Mosaico Botichino', unidad:'m2'},
       {codigo:'3210S   4040', descripcion:'Mosaico Brechiato', unidad:'m2'},
       {codigo:'801010KL4040', descripcion:'Loseta cemento 40', unidad:'m2'},
+      {codigo:'801010KL6040', descripcion:'Loseta cemento 60', unidad:'m2'},
       {codigo:'801010SL6040', descripcion:'Loseta Gris Perla 60', unidad:'m2'},
       {codigo:'801011SS6040', descripcion:'Loseta Blanca 60', unidad:'m2'},
       {codigo:'803210SS6040', descripcion:'Loseta Brechiato 60', unidad:'m2'},
